@@ -12,7 +12,7 @@ app.use(json());
 app.use(sessions({
     secret: SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     maxAge: null
 }))
 
