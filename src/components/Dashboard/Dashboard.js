@@ -10,6 +10,7 @@ class Dashboard extends Component {
             search: '',
             userposts: true
         }
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     componentDidMount(){
@@ -34,7 +35,17 @@ class Dashboard extends Component {
         }
     }
 
+    handleToggle(){
+        if(this.state.userposts === true){
+            this.setState({userposts: false})
+        } else {
+            this.setState({userposts: true})
+        }
+        this.componentDidMount()
+    }
+
     render(){
+        console.log(this.state.userposts)
         const postList = this.state.posts.map(postObj => {
             return (
                 <div>
@@ -47,6 +58,9 @@ class Dashboard extends Component {
         })
         return (
             <div>
+                <button onClick = {() => this.handleToggle()}>
+                        My Posts
+                </button>
                 { postList }
             </div>
         )
