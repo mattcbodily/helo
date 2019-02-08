@@ -34,5 +34,11 @@ module.exports = {
         req.app.get('db').getAllPosts()
         .then(posts => res.status(200).send(posts))
         .catch(err => res.status(500).send({errorMessage: 'Error'}, console.log(err)))
+    },
+    getUserPosts: (req, res) => {
+        const { params } = req;
+        req.app.get('db').getUserPosts(params.id)
+        .then(posts => res.status(200).send(posts))
+        .catch(err => res.status(500).send({errorMessage: 'Error'}, console.log(err)))
     }
 }

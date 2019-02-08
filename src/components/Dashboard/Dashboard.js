@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class Dashboard extends Component {
     constructor(props){
@@ -16,12 +17,21 @@ class Dashboard extends Component {
     }
 
     getPosts(){
-        axios.get('/api/posts')
-        .then(res => {
-            this.setState({
-                posts: res.data
+        if(!this.state.userposts){
+            axios.get('/api/posts')
+            .then(res => {
+                this.setState({
+                    posts: res.data
+                })
             })
-        })
+        } else {
+            axios.get(`/api/posts/${this.props.id}`)
+            .then(res => {
+                this.setState({
+                    posts: res.data
+                })
+            })
+        }
     }
 
     render(){
@@ -43,4 +53,10 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+const mapStateToProps = reduxState => {
+    return {
+        id: reduxState.id
+    }
+}
+
+export default connect(mapStateToProps)(Dashboard);
