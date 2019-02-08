@@ -29,5 +29,9 @@ module.exports = {
         } else {
             res.status(401).send('Authentication Failed');
         }
+    },
+    logout: (req, res) => {
+        req.session.destroy();
+        res.sendStatus(200);
     }
 }
