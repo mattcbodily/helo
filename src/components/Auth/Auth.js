@@ -55,8 +55,14 @@ class Auth extends Component {
     }
 }
 
+const mapStateToProps = reduxState => {
+    return {
+        id: reduxState.id
+    }
+}
+
 const mapDispatchToProps = {
     updateUser
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

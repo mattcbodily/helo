@@ -30,8 +30,9 @@ module.exports = {
             res.status(401).send('Authentication Failed');
         }
     },
-    logout: (req, res) => {
-        req.session.destroy();
-        res.sendStatus(200);
+    getPosts: (req, res) => {
+        req.app.get('db').getAllPosts()
+        .then(posts => res.status(200).send(posts))
+        .catch(err => res.status(500).send({errorMessage: 'Error'}, console.log(err)))
     }
 }
